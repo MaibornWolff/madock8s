@@ -1,0 +1,94 @@
+{
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "schemes": [
+    "http"
+  ],
+  "swagger": "2.0",
+  "info": {
+    "description": "Documentation of sample-metrics",
+    "title": "sample-metrics.",
+    "version": "1.0.0"
+  },
+  "host": "sample-metrics:80",
+  "basePath": "/",
+  "paths": {
+    "/greetings": {
+      "post": {
+        "tags": [
+          "greetings-tag"
+        ],
+        "summary": "Greetings returns a greeting to the developer.",
+        "operationId": "idOfGreetingsEndpoint",
+        "parameters": [
+          {
+            "description": "This text will appear as description of your request body.",
+            "name": "Body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/GreetingRequest"
+            }
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/metrics": {
+      "get": {
+        "tags": [
+          "metrics-tag"
+        ],
+        "summary": "Metrics returns a list of metrics available for this service.",
+        "operationId": "idOfMetricsEndpoint",
+        "responses": {
+          "200": {}
+        }
+      }
+    }
+  },
+  "definitions": {
+    "GreetingRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "x-go-name": "Name"
+        }
+      },
+      "x-go-package": "github.com/MaibornWolff/maDocK8s/exporter/sample-metrics/swagger/api"
+    },
+    "GreetingResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "object",
+          "properties": {
+            "greeting": {
+              "type": "string",
+              "x-go-name": "Greeting"
+            }
+          },
+          "x-go-name": "Result"
+        }
+      },
+      "x-go-package": "github.com/MaibornWolff/maDocK8s/exporter/sample-metrics/swagger/api"
+    }
+  },
+  "responses": {
+    "GreetingResponse": {
+      "description": "This text will appear as description of your response body.",
+      "schema": {
+        "$ref": "#/definitions/GreetingResponse"
+      }
+    }
+  },
+  "securityDefinitions": {
+    "basic": {
+      "type": "basic"
+    }
+  }
+}

@@ -1,0 +1,28 @@
+syntax="proto3";
+package notifier;
+option go_package = "github.com/MaibornWolff/maDocK8s/core/types/exporter/notifier";
+
+service notifier {
+    rpc Notify (Instance) returns (NotifierResult);
+    rpc NotifyDelete (Instance) returns (NotifierResult);
+}
+
+message Instance {
+    string address = 1;
+    string name = 2;
+    string namespace = 3;
+    Map configuration = 4;
+}
+
+
+message Map {
+
+    message Pair {
+        string key = 1;
+        string value = 2;
+    }
+    repeated Pair items = 1;
+}
+
+message NotifierResult {
+}

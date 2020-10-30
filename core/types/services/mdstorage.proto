@@ -1,0 +1,19 @@
+syntax="proto3";
+package mdstorage;
+option go_package = "github.com/MaibornWolff/maDocK8s/core/types/services/mdstorage";
+
+import "protocol/markdown.proto";
+
+service mdstorage {
+    rpc StoreMarkdown (protocol.Markdown) returns (StoreResult);
+    rpc UpdateMarkdown (protocol.Markdown) returns (StoreResult);
+    rpc DeleteMarkdown (protocol.Markdown) returns (RemoveResult);
+}
+
+message StoreResult {
+    int32 size = 1;
+    string filename = 2;
+}
+
+message RemoveResult {
+}

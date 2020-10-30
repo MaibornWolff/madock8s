@@ -1,0 +1,52 @@
+# Default values for gitlab-exporter.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: maibornwolff/madock8s_gitlab_exporter
+  tag: latest
+  pullPolicy: Never
+
+madock8sID: "gitlabExporter"
+
+annotations:
+  gitlabExporter:
+    baseurl: "https://git.maibornwolff.de/api/v4/projects/3206/repository/"
+    path: "exporter/gitlab"
+    recursive: "false"
+    ref: "master"
+    pattern: ".\\.md"
+  envExporter:
+    deployment: gitlab-exporter
+
+arguments: ['--storage-address', 'mdstorage:80']
+
+gitlabToken: 8-zhSkQJNvYJkr2Xadyr
+
+env:
+  deletionStrategy: UPDATE # UPDATE | IGNORE | DELETE
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+service:
+  type: ClusterIP
+  port: 80
+
+resources:
+  limits:
+    cpu: 100m
+    memory: 128Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi

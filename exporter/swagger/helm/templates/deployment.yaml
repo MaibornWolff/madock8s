@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "swagger-exporter.fullname" . }}
+  labels:
+{{ include "swagger-exporter.labels" . | indent 4 }}
+  annotations:
+{{ include "exporter.annotations" . | indent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "swagger-exporter.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ include "swagger-exporter.name" . }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+    spec:
+    {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          args:
+          {{  range .Values.arguments }}
+            - {{ . }}
+          {{ end }}
+          env: 
+            - name: "SWAGGER_JSON_URL"
+              value: {{ .Values.env.swaggerJsonURL | quote }}
+            - name: "SWAGGER_PORT"
+              value: {{ .Values.env.swaggerPort | quote }}
+            - name: "BASE_URL"
+              value: {{ .Values.env.baseURL | quote }}
+            - name: "SWAGGER_JSON"
+              value: {{ .Values.env.swaggerJSON | quote }}
+            - name: "DELETION_STRATEGY"
+              value: {{ .Values.env.deletionStrategy | quote }}
+          ports:
+            - name: http
+              containerPort: 81
+              protocol: TCP
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}

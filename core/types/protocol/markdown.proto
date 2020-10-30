@@ -1,0 +1,11 @@
+syntax="proto3";
+package protocol;
+option go_package = "github.com/MaibornWolff/maDocK8s/core/types/protocol";
+
+message Markdown {
+  string content = 1;
+  repeated string tags = 2;
+  string name = 3;
+  string source = 4;
+  string exporter = 5;
+}

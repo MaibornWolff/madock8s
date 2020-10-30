@@ -1,0 +1,17 @@
+apiVersion: v1
+data:
+  default.conf: |-
+    server {
+        listen 80;
+        server_name daux.io;
+
+        index index.html;
+        charset utf-8;
+
+        root /var/www;
+    }
+kind: ConfigMap
+metadata:
+  name: {{ include "madock8s-dashboard.fullname" . }}
+  labels:
+{{ include "madock8s-dashboard.labels" . | indent 4 }}

@@ -1,0 +1,23 @@
+
+# should be always 1
+replicaCount: 1
+
+image:
+  repository: maibornwolff/madock8s-controller
+  tag: latest
+  pullPolicy: Never
+
+# targetNamespace: "default"
+
+service:
+  type: NodePort
+  port: 443
+
+resources:
+  limits:
+    cpu: 100m
+    memory: 128Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+

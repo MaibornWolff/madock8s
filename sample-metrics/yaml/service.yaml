@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: sample-metrics
+  namespace: default
+  labels:
+    app: sample-metrics
+    madock8s: "SampleMetrics"
+spec:
+  type: NodePort
+  ports:
+    - name: http
+      port: 80
+      protocol: TCP
+      targetPort: 2112
+    - name: swagger
+      port: 81
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    app: sample-metrics
+    

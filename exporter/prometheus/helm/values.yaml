@@ -1,0 +1,53 @@
+# Default values for prometheus-exporter.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: maibornwolff/madock8s_prometheus_exporter
+  tag: latest
+  pullPolicy: Never
+
+
+arguments: ['--storage-address', 'mdstorage:80']
+
+env: 
+  deletionStrategy: UPDATE
+
+madock8sID: "prometheusExporter"
+
+annotations:
+  gitlabExporter:
+    baseurl: "https://git.maibornwolff.de/api/v4/projects/3206/repository/"
+    path: "exporter/prometheus"
+    recursive: "false"
+    ref: "master"
+    pattern: ".\\.md"
+  envExporter:
+    deployment: prometheus-exporter
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+service:
+  type: ClusterIP
+  port: 80
+
+
+resources:
+  limits:
+    cpu: 100m
+    memory: 128Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+

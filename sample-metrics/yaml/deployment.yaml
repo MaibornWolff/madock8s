@@ -1,0 +1,120 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sample-metrics
+  annotations:
+    madock8s: "SampleMetrics"
+    madock8s.exporter/prometheusExporter: "true"
+    madock8s.exporter/gitlabExporter.baseurl: "https://git.maibornwolff.de/api/v4/projects/3206/repository/"
+    madock8s.exporter/gitlabExporter.path: "sample-metrics"
+    madock8s.exporter/gitlabExporter.recursive: "true"
+    madock8s.exporter/gitlabExporter.ref: "master"
+    madock8s.exporter/gitlabExporter.pattern: ".\\.md"
+    madock8s.exporter/envExporter: "sample-metrics"
+    # # madock8s.exporter/swaggerExporter.jsonurl: https://petstore.swagger.io/v2/swagger.json
+    # madock8s.exporter/swaggerExporter.baseurl: "/docs"
+    # madock8s.exporter/swaggerExporter.json: "/swagger.json"
+    # madock8s.exporter/swaggerExporter.port: "81"
+    madock8s.exporter/swaggerExporter: "true"
+    madock8s.exporter/versionExporter: "true"
+
+spec:
+  selector:
+    matchLabels:
+      "app": "sample-metrics"
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: sample-metrics
+    spec:
+      containers:
+        - name: sample-metrics
+          image: maibornwolff/madock8s_sample_metrics:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 2112
+          env:
+            - name: DEPLOYMENT_ENV_VAR_1
+              value: "Hello, Deployment-v1"
+            - name: DEPLOYMENT_ENV_VAR_2
+              value: "Hello, Deployment-v2"
+            - name: DEPLOYMENT_ENV_VAR_3
+              value: "Hello, Deployment-v3"
+            - name: ENV_VALUE_FROM_CONFIGMAP
+              valueFrom:
+                  configMapKeyRef:
+                    name: sample-metrics-config-map
+                    key: env_value
+            - name: ANOTHER_ENV_VALUE_FROM_CONFIGMAP
+              valueFrom:
+                  configMapKeyRef:
+                    name: sample-metrics-config-map
+                    key: another_env_value
+            - name: SECRET_USERNAME
+              valueFrom:
+                  secretKeyRef:
+                    key: username
+                    name: sample-metrics-auth
+            - name: SECRET_PASSWORD
+              valueFrom:
+                  secretKeyRef:
+                    key: password
+                    name: sample-metrics-auth
+            - name: FIELD_REF_NODE_NAME
+              valueFrom:
+                  fieldRef:
+                    fieldPath: spec.nodeName
+            - name: RESOURCE_FIELD_REF
+              valueFrom:
+                  resourceFieldRef:
+                    containerName: busybox
+                    resource: limits.memory
+
+          resources:
+            limits:
+              cpu: 100m
+              memory: 128Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
+
+        - name: busybox
+          imagePullPolicy: IfNotPresent
+          image: busybox:latest
+          env:
+            - name: BUSYBOX_ENV_VAR
+              value: "Hello, Busybox"
+          command: ["sh", "-c", "echo $BUSYBOX_ENV_VAR && sleep 3600"]
+          resources:
+            limits:
+              cpu: 100m
+              memory: 128Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
+        
+        - name: swagger-ui
+          imagePullPolicy: IfNotPresent
+          image: maibornwolff/madock8s_sample_metrics_swagger:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SWAGGER_JSON
+              value: "/swagger.json"
+            - name: BASE_URL
+              value: "/docs"
+            # - name: API_KEY
+              # value: "**None**"
+            - name: SWAGGER_JSON_URL
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.annotations['madock8s.exporter/swaggerExporter.jsonurl']
+          resources:
+            limits:
+              cpu: 100m
+              memory: 128Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi

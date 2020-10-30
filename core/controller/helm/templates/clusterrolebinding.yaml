@@ -1,0 +1,12 @@
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+  name: {{ include "maDocK8s-controller.name" . }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: {{ include "maDocK8s-controller.name" . }}
+subjects:
+- kind: ServiceAccount
+  name: {{ include "maDocK8s-controller.name" . }}
+  namespace: {{ .Release.Namespace | quote }}

@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sample-metrics-config-map
+data:
+  env_value: "Hello ConfigMap-v1"
+  another_env_value: "Hello ConfigMap-v2"
+  

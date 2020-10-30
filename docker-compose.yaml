@@ -1,0 +1,55 @@
+version: '3'
+
+services:
+  madock8s:
+    image: maibornwolff/madock8s-controller
+    build:
+      context: core
+      dockerfile: controller/Dockerfile
+
+  mdstorage:
+    image: maibornwolff/madock8s-mdstorage
+    build:
+      context: core
+      dockerfile: services/mdstorage/Dockerfile
+
+  prometheus-exporter:
+    image: maibornwolff/madock8s_prometheus_exporter
+    build:
+      context: ./
+      dockerfile: exporter/prometheus/Dockerfile
+  
+  gitlab-exporter:
+    image: maibornwolff/madock8s_gitlab_exporter
+    build:
+      context: ./
+      dockerfile: exporter/gitlab/Dockerfile
+
+  env-exporter:
+    image: maibornwolff/madock8s_env_exporter
+    build:
+      context: ./
+      dockerfile: exporter/env/Dockerfile
+
+  swagger-exporter:
+    image: maibornwolff/madock8s_swagger_exporter
+    build:
+      context: ./
+      dockerfile: exporter/swagger/Dockerfile
+
+  version-exporter:
+    image: maibornwolff/madock8s_version_exporter
+    build:
+      context: ./
+      dockerfile: exporter/version/Dockerfile
+
+  sample-metrics:
+    image: maibornwolff/madock8s_sample_metrics
+    build: 
+      context: sample-metrics
+
+  sample-metrics-swagger:
+    image: maibornwolff/madock8s_sample_metrics_swagger
+    build: 
+      context: sample-metrics
+      dockerfile: swagger/Dockerfile

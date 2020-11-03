@@ -6,7 +6,6 @@ Prometheus Exporter is the service that will fetch and read metrics from given m
 ## Configuration
 
 To retrieve the list of available metrics, Prometheus Exporter uses service's clusterIP:80/metrics endpoint.
-TODO: Move endpoint configuration to ENV vars
 
 ### Target Deployment
 

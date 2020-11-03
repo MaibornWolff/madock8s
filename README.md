@@ -8,6 +8,7 @@ Exporters collect specific information about microservices and add it to md-temp
 The resulting md-files are then sent to storage, where a Kubernetes job generates a documentation web-portal.
 Finally, a nginx web-server serves the documentation portal for end users.
 
+![Overview](docs/overview.png)
 
 ### Core Services
 

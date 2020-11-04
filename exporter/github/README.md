@@ -1,39 +1,27 @@
 # GitHub Exporter
 
-Gitlab Exporter collects all .md files in the git-repository of a service.
+GitHub Exporter collects all .md files from the specified path in the git-repository of a service.
 
 ## Authentication
 
-Gitlab-Exporter requires authentication token in order to access private repositories hosted on GitLab. 
-Supported authentication:
-- *Recommended*: Project Access Token - read_api is sufficient.
-Guide: [GitLab API Docs](https://docs.gitlab.com/ee/user/project/settings/project_access_tokens.html)
+Github-Exporter requires authentication token in order to access private repositories hosted on GitHub. 
 
+Personal Access Token - repo is sufficient.
+Guide: [GitHub API Docs](https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/creating-a-personal-access-token)
 
-- Personal Access Token - read_api is sufficient.
-Guide: [GitLab API Docs](https://docs.gitlab.com/ee/api/README.html#personalproject-access-tokens)
-
-Paste a newly generated token to field `gitlabToken` in `helm/gitlab-exporter/values.yaml`. This token can be reused by all members of the team.
+Paste a newly generated token to field `authToken` in `helm/github-exporter/values.yaml`. This token can be reused by all members of the team.
 
 ## Configuration
 
 ### Target Deployment
 
 Target deployment has to provide the following annotations in metadata:
-```
-    madock8s.exporter/gitlabExporter.baseurl: https://git.example.com/api/v4/projects/9999/repository/
-    madock8s.exporter/gitlabExporter.path: exporter/sample-metrics
-    madock8s.exporter/gitlabExporter.pattern: .\\.md
-    madock8s.exporter/gitlabExporter.recursive: true
-    madock8s.exporter/gitlabExporter.ref: master
+```yaml
+    madock8s.exporter/githubExporter.baseurl: https://api.github.com/repos/MaibornWolff/madock8s/contents/<path>
 ```
 
-Parameters Breakdown:
-- __baseurl__: The base URL of the project, accessible via GitLab API. NOTE: 9999 is Project ID, not name.
-- __path__: The relative path to the root. The exporter searches for files from here.
-- __pattern__ (optional): Pattern that is used to search files. The default behaviour is to search all .md files.
-- __recursive__ (optional): Boolean flag, Enables search in sub-directories for the path. "true" (default): search in sub-directories; "false": search only in path.
-- __ref__: Name of git-branch where required files are stored.
+Annotaions Breakdown:
+- __baseurl__: The base URL of the project, accessible via GitHub API. Use <path> if the target document is not in the repository's root.
 
 ### Delete Mode
 

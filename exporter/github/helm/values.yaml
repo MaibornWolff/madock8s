@@ -12,8 +12,14 @@ image:
 madock8sID: "githubExporter"
 
 annotations:
-  placeholder: placeholder
-
+  githubExporter:
+    githuburl: https://api.github.com/repos/MaibornWolff/madock8s/contents/exporter/github
+  gitlabExporter:
+    baseurl: "https://git.maibornwolff.de/api/v4/projects/3206/repository/"
+    path: "exporter/github"
+    recursive: "false"
+    ref: "master"
+    pattern: ".\\.md"
 arguments: ['--storage-address', 'mdstorage:80']
 
 authToken: PLACEHOLDER

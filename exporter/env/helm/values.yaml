@@ -12,6 +12,8 @@ image:
 madock8sID: "envExporter"
 
 annotations:
+  githubExporter:
+    githuburl: https://api.github.com/repos/MaibornWolff/madock8s/contents/exporter/env
   gitlabExporter:
     baseurl: "https://git.maibornwolff.de/api/v4/projects/3206/repository/"
     path: "exporter/env"

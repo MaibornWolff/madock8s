@@ -51,6 +51,10 @@ Common annotations
 {{- define "exporter.annotations" -}}
 madock8s: {{ .Values.madock8sID | quote }}
 
+{{- if .Values.annotations.githubExporter }}
+madock8s.exporter/githubExporter.githuburl: {{ .Values.annotations.githubExporter.githuburl | quote }}
+{{- end }}
+
 {{- if .Values.annotations.gitlabExporter }}
 madock8s.exporter/gitlabExporter.baseurl: {{ .Values.annotations.gitlabExporter.baseurl | quote }}
 madock8s.exporter/gitlabExporter.path: {{ .Values.annotations.gitlabExporter.path | quote }}

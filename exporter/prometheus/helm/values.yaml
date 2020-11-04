@@ -18,6 +18,8 @@ env:
 madock8sID: "prometheusExporter"
 
 annotations:
+  githubExporter:
+    githuburl: https://api.github.com/repos/MaibornWolff/madock8s/contents/exporter/prometheus
   gitlabExporter:
     baseurl: "https://git.maibornwolff.de/api/v4/projects/3206/repository/"
     path: "exporter/prometheus"

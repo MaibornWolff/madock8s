@@ -17,6 +17,8 @@ env:
 madock8sID: "versionExporter"
 
 annotations:
+  githubExporter:
+    githuburl: https://api.github.com/repos/MaibornWolff/madock8s/contents/exporter/version
   gitlabExporter:
     baseurl: "https://git.maibornwolff.de/api/v4/projects/3206/repository/"
     path: "exporter/version"

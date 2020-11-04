@@ -6,7 +6,7 @@ metadata:
   annotations:
     madock8s: "SampleMetrics"
     madock8s.exporter/prometheusExporter: "true"
-    madock8s.exporter/githubExporter.baseurl: "https://api.github.com/repos/MaibornWolff/madock8s/contents/sample-metrics"
+    madock8s.exporter/githubExporter.githuburl: "https://api.github.com/repos/MaibornWolff/madock8s/contents/sample-metrics"
     madock8s.exporter/gitlabExporter.baseurl: "https://git.maibornwolff.de/api/v4/projects/3206/repository/"
     madock8s.exporter/gitlabExporter.path: "sample-metrics"
     madock8s.exporter/gitlabExporter.recursive: "true"

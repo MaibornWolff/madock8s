@@ -31,7 +31,7 @@ type queryParams struct {
 }
 
 func GetMdFiles(config map[string]string) ([]File, error) {
-	baseurl := config["baseurl"]
+	baseurl := config["githuburl"]
 	pattern := readPatternParam(config)
 
 	client := &http.Client{}
@@ -127,7 +127,9 @@ func configureRequest(url *url.URL) *http.Request {
 
 func setAuthToken(req *http.Request) *http.Request {
 	token := os.Getenv("AUTH_TOKEN")
-	req.Header.Set("Authorization", fmt.Sprintf("token %v", token))
+	if token != "PLACEHOLDER" {
+		req.Header.Set("Authorization", fmt.Sprintf("token %v", token))
+	}
 	return req
 }
 

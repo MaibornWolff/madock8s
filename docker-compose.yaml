@@ -25,6 +25,12 @@ services:
       context: ./
       dockerfile: exporter/gitlab/Dockerfile
 
+  github-exporter:
+    image: maibornwolff/madock8s_github_exporter
+    build:
+      context: ./
+      dockerfile: exporter/github/Dockerfile
+
   env-exporter:
     image: maibornwolff/madock8s_env_exporter
     build:

@@ -11,6 +11,7 @@ fi
 helm del $arg madock8s-controller
 helm del $arg prometheus-exporter
 helm del $arg gitlab-exporter
+helm del $arg github-exporter
 helm del $arg env-exporter
 helm del $arg swagger-exporter
 helm del $arg version-exporter

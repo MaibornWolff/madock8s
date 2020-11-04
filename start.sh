@@ -24,6 +24,9 @@ helm upgrade -i madock8s-controller -f $controllerHelmPath/values.yaml $controll
 envExporterHelmPath=exporter/env/helm
 helm upgrade -i env-exporter -f $envExporterHelmPath/values.yaml $envExporterHelmPath
 
+githubExporterHelmPath=exporter/github/helm
+helm upgrade -i github-exporter -f $githubExporterHelmPath/values.yaml $githubExporterHelmPath
+
 gitlabExporterHelmPath=exporter/gitlab/helm
 helm upgrade -i gitlab-exporter -f $gitlabExporterHelmPath/values.yaml $gitlabExporterHelmPath
 

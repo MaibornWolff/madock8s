@@ -6,7 +6,7 @@ RUN mkdir -p "/go/src/github.com/MaibornWolff/maDocK8s/exporter/sample-metrics"
 
 WORKDIR "/go/src/github.com/MaibornWolff/maDocK8s/exporter/sample-metrics"
 
-RUN GO111MODULE=off go get -u "github.com/go-swagger/go-swagger/cmd/swagger"
+RUN go get -u "github.com/go-swagger/go-swagger/cmd/swagger"
 
 COPY . .
 

@@ -7,7 +7,7 @@ RUN mkdir -p "/go/src/github.com/MaibornWolff/maDocK8s/exporter/prometheus/sampl
 WORKDIR "/go/src/github.com/MaibornWolff/maDocK8s/exporter/prometheus/sample-metrics"
 
 COPY go.mod .
-COPY go.mod .
+COPY go.sum .
 RUN go mod download
 
 COPY . "/go/src/github.com/MaibornWolff/maDocK8s/exporter/prometheus/sample-metrics"

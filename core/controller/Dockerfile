@@ -11,6 +11,7 @@ COPY controller/go.mod controller
 COPY controller/go.sum controller
 
 COPY types/go.mod types
+COPY types/go.sum types
 
 WORKDIR /go/src/github.com/MaibornWolff/maDocK8s/core/controller
 RUN go mod download

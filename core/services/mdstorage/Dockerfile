@@ -13,7 +13,9 @@ COPY services/mdstorage/go.mod services/mdstorage
 COPY services/mdstorage/go.sum services/mdstorage
 
 COPY types/go.mod types/
+COPY types/go.sum types/
 COPY utils/go.mod utils/
+COPY utils/go.sum utils/
 
 WORKDIR "/go/src/github.com/MaibornWolff/maDocK8s/core/services/mdstorage"
 RUN go mod download

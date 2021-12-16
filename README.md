@@ -74,7 +74,7 @@ Installed tools:
 - Mandatory for the **first** run. Execute:
 ```
     helm init 
-    chmod u+x ./start.sh ./clean.sh
+    chmod u+x ./start.sh ./reset.sh
 ```
 
 2. Execute `./start.sh`. The script will build all required docker images and install helm charts.

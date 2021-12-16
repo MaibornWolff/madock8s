@@ -8,7 +8,7 @@ The `/metrics` endpoint responsds with the list of available prometheus metrics 
 
 The example configuration for available exporters is presented below. 
 It is an excerpt from `yaml/deployment.yaml`.
-Availability of `madock8s.exporter/<exporterName>` is sufficient for controller to notify the exporter with name <exporterName>.
+Availability of `madock8s.exporter/exporterName` is sufficient for controller to notify the exporter with name exporterName.
 For details on value meanings, please refer to corresponding exporter documentation.
 
 ```yaml
